@@ -1,0 +1,40 @@
+name: Dataform CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+# 権限の設定: Workload Identity連携に必要
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  validate-dataform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # GCP Workload Identity Federation を使用した認証
+      # NOTE: 事前にGCPとGitHubの連携設定が必要です
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: 'projects/644836843362/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions-ci-runner@tactical-racer-432905-g9.iam.gserviceaccount.com'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dataform CLI
+        run: npm install -g @dataform/cli
+
+      # Dataformのコードがあるディレクトリを指定してください
+      # (例: my-repo/definitions, my-repo/dataform など)
+      - name: Compile Dataform project
+        run: dataform compile --project-dir=./definitions
