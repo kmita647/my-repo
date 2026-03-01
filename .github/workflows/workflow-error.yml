@@ -1,0 +1,7 @@
+name: YAML error
+on: push
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:                          # インデントを修正しました
+      - run: echo "YAML Fixed"
