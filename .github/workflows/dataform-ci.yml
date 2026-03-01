@@ -37,4 +37,4 @@ jobs:
       # Dataformのコードがあるディレクトリを指定してください
       # (例: my-repo/definitions, my-repo/dataform など)
       - name: Compile Dataform project
-        run: dataform compile --project-dir=./definitions
+        run: dataform compile
