@@ -31,4 +31,5 @@ jobs:
           runtime: 'python310'     # 🐍 使用するPythonのバージョン（例: python310, python311）
           entry_point: 'main'      # main.pyの中で実行される関数名
           region: 'asia-northeast1' 
+          source_dir: 'cloud_functions/my_test_function'
           service_account_email: 'github-actions-ci-runner@tactical-racer-432905-g9.iam.gserviceaccount.com'
