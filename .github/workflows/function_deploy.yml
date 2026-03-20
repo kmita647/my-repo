@@ -3,7 +3,7 @@ name: Deploy to Cloud Run functions
 on:
   push:
     branches:
-      - main # ここは検証で使用するブランチ名（developなど）に変更してください
+      - develop # ここは検証で使用するブランチ名（developなど）に変更してください
 
 jobs:
   deploy:
@@ -21,7 +21,7 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           # プロジェクト番号を含めたWIFプロバイダのフルパスを指定します
-          workload_identity_provider: 'projects/644836843362/locations/global/workloadIdentityPools/github-pool1/providers/github-provider'
+          workload_identity_provider: 'projects/644836843362/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: 'github-actions-ci-runner@tactical-racer-432905-g9.iam.gserviceaccount.com'
 
       - name: Deploy Cloud Run function
